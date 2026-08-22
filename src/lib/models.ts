@@ -125,7 +125,9 @@ export function priceLabel(pricing: ModelPricing): string {
     maximumFractionDigits: pricing.price < 1 ? 4 : 2,
   }).format(pricing.price);
 
-  return `${amount} · ${PRICING_TYPE_LABELS[pricing.type].toLowerCase()}`;
+  const label: string | undefined = PRICING_TYPE_LABELS[pricing.type] ?? pricing.type;
+
+  return label ? `${amount} · ${label.toLowerCase()}` : amount;
 }
 
 const sizeFormatter = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
