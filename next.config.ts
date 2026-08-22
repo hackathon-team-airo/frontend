@@ -2,6 +2,10 @@ import type { NextConfig } from 'next';
 
 const isDev = process.env.NODE_ENV === 'development';
 
+const isCloudflare = Boolean(
+  process.env.CLOUDFLARE_BUILD || process.env.WORKERS_CI || process.env.CF_PAGES,
+);
+
 const contentSecurityPolicy = [
   `default-src 'self'`,
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
@@ -38,7 +42,7 @@ const nextConfig: NextConfig = {
 
   allowedDevOrigins: ['*.ngrok-free.app', '*.ngrok.io', '*.trycloudflare.com'],
   poweredByHeader: false,
-  output: process.env.CF_PAGES ? undefined : 'standalone',
+  output: isCloudflare ? undefined : 'standalone',
   typedRoutes: true,
   serverExternalPackages: ['pino', 'pino-pretty'],
 
