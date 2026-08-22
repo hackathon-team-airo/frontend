@@ -21,13 +21,7 @@ export type Logger = { [K in Level]: LogFn } & {
 
 const threshold = levelOrder[env.LOG_LEVEL];
 
-const redactedKeys = new Set([
-  'password',
-  'token',
-  'secret',
-  'authorization',
-  'cookie',
-]);
+const redactedKeys = new Set(['password', 'token', 'secret', 'authorization', 'cookie']);
 
 function serialize(value: unknown): unknown {
   if (value instanceof Error) {
@@ -92,8 +86,7 @@ function createChildLogger(bindings: Bindings): Logger {
   const instance = {} as Logger;
 
   for (const level of Object.keys(levelOrder) as Level[]) {
-    instance[level] = (payload, message) =>
-      write(level, bindings, payload, message);
+    instance[level] = (payload, message) => write(level, bindings, payload, message);
   }
 
   instance.child = (extra) => createChildLogger({ ...bindings, ...extra });

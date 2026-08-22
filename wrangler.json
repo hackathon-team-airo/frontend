@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "hackathon-frontend",
+  "name": "frontend",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-08-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
@@ -10,5 +10,11 @@
   },
   "observability": {
     "enabled": true
+  },
+  "vars": {
+    "NEXT_PUBLIC_APP_NAME": "Hackathon",
+    "BENCHMARK_API_URL": "https://verifi-backend-cuzo.onrender.com/",
+    "CHAT_API_URL": "https://verifi-concierge.onrender.com/api/chat",
+    "QSTASH_URL": "https://qstash-us-east-1.upstash.io/"
   }
 }
