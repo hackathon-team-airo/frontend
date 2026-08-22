@@ -40,7 +40,6 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   output: 'standalone',
   typedRoutes: true,
-  serverExternalPackages: ['pino', 'pino-pretty'],
 
   images: {
     remotePatterns: [],

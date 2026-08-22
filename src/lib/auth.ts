@@ -1,7 +1,6 @@
 import 'server-only';
 
 import { betterAuth } from 'better-auth';
-import { dash } from '@better-auth/infra';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { nextCookies } from 'better-auth/next-js';
 
@@ -53,10 +52,7 @@ export const auth = betterAuth({
     cookiePrefix: 'hackathon',
   },
   socialProviders,
-  plugins: [
-    ...(env.BETTER_AUTH_API_KEY ? [dash({ apiKey: env.BETTER_AUTH_API_KEY })] : []),
-    nextCookies(),
-  ],
+  plugins: [nextCookies()],
 });
 
 export type Session = typeof auth.$Infer.Session;
